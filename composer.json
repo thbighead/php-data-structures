@@ -12,5 +12,12 @@
             "email": "thcmatias@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=7.3"
+    },
+    "autoload": {
+        "psr-0": {
+            "TNCPHP": "src/"
+        }
+    }
 }
