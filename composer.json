@@ -1,0 +1,16 @@
+{
+    "name": "tnc/php-data-structures",
+    "description": "Main Computer Science structures used as base of every single algorithm we do",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thales Nathan",
+            "email": "thcmatias@gmail.com"
+        }
+    ],
+    "require": {}
+}
