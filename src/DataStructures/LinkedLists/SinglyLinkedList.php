@@ -58,22 +58,24 @@ class SinglyLinkedList extends GenericLinkedList
      */
     public function remove($dataSearch)
     {
+        /** @var Node $currentNode */
         $currentNode = $this->head;
+        $parentNode = $currentNode;
 
         while ($currentNode) {
             $currentData = $currentNode->getData();
+            $nextNode = $currentNode->getNext();
 
-            if ($this->compareData($currentData, $dataSearch)) {
-                isset($parentNode) ?
-                    $parentNode->setNext($currentNode->getNext()) :
-                    ($this->head = $this->head->getNext());
+            if ($this->compareData($currentData, $dataSearch)) { // Enter here if we found the node to remove
+                $parentNode->setNext($nextNode);
+
                 unset($currentNode);
 
                 return $this;
             }
 
             $parentNode = $currentNode;
-            $currentNode = $currentNode->getNext();
+            $currentNode = $nextNode;
         }
 
         throw new SearchValueNotFoundException($dataSearch);

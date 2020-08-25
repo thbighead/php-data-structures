@@ -25,9 +25,10 @@ trait WithPosition
      *
      * @return Node|WithPosition
      */
-    public function setNext(Node $next)
+    public function setNext($next)
     {
-        $next->position = $this->position + 1;
+        if ($next !== null) $next->position = $this->position + 1;
+
         $this->next = $next;
 
         return $this;

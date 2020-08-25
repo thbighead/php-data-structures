@@ -44,19 +44,17 @@ trait WithTail
     {
         /** @var Node $currentNode */
         $currentNode = $this->head;
+        $parentNode = $currentNode;
 
         while ($currentNode) {
             $currentData = $currentNode->getData();
+            $nextNode = $currentNode->getNext();
 
             if ($this->compareData($currentData, $dataSearch)) { // Enter here if we found the node to remove
-                if (isset($parentNode)) { // So the node isn't the head
-                    $parentNode->setNext($currentNode->getNext());
+                $parentNode->setNext($nextNode);
 
-                    if ($currentNode->getNext() === null) { // Actually the node is the tail
-                        $this->tail = $parentNode;
-                    }
-                } else {
-                    $this->head = $this->head->getNext();
+                if (!$nextNode) {
+                    $this->tail = $parentNode;
                 }
 
                 unset($currentNode);
@@ -65,7 +63,7 @@ trait WithTail
             }
 
             $parentNode = $currentNode;
-            $currentNode = $currentNode->getNext();
+            $currentNode = $nextNode;
         }
 
         throw new SearchValueNotFoundException($dataSearch);

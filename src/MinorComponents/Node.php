@@ -51,7 +51,7 @@ class Node
      *
      * @return Node
      */
-    public function setNext(Node $next)
+    public function setNext($next)
     {
         $this->next = $next;
 

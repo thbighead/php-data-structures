@@ -115,4 +115,60 @@ final class LinkedListTest extends TestCase
             $this->fail($exception->getMessage());
         }
     }
+
+    public function testRemoveNodeFromSinglyLinkedList(): void
+    {
+        $singlyLinkedList = new SinglyLinkedList;
+
+        $singlyLinkedList->add(new Node('nothing'))
+            ->add(new Node('else'))
+            ->add(new Node('matters'));
+
+        try {
+            $singlyLinkedList->remove('never');
+            $this->fail('Found a node to remove with value "never" inside list without adding it!');
+        } catch (SearchValueNotFoundException $exception) {
+            $this->assertTrue(true);
+        }
+
+        try {
+            $singlyLinkedList->remove('matters');
+            try {
+                $singlyLinkedList->search('matters');
+                $this->fail('Found a node with value "matters" inside list after removing it!');
+            } catch (SearchValueNotFoundException $exception) {
+                $this->assertTrue(true);
+            }
+        } catch (SearchValueNotFoundException $exception) {
+            $this->fail($exception->getMessage());
+        }
+    }
+
+    public function testRemoveNodeWithPositionIntoSinglyLinkedList(): void
+    {
+        $singlyLinkedList = new SinglyLinkedList;
+
+        $singlyLinkedList->add(new NodeWithPosition('nothing'))
+            ->add(new NodeWithPosition('else'))
+            ->add(new NodeWithPosition('matters'));
+
+        try {
+            $singlyLinkedList->remove('never');
+            $this->fail('Found a node to remove with value "never" inside list without adding it!');
+        } catch (SearchValueNotFoundException $exception) {
+            $this->assertTrue(true);
+        }
+
+        try {
+            $foundNode = $singlyLinkedList->remove('matters');
+            try {
+                $singlyLinkedList->search('matters');
+                $this->fail('Found a node with value "matters" inside list after removing it!');
+            } catch (SearchValueNotFoundException $exception) {
+                $this->assertTrue(true);
+            }
+        } catch (SearchValueNotFoundException $exception) {
+            $this->fail($exception->getMessage());
+        }
+    }
 }
