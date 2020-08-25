@@ -9,7 +9,7 @@ use TNCPHP\MinorComponents\Node;
  */
 class SinglyLinkedList extends GenericLinkedList
 {
-    public function add(Node $node): SinglyLinkedList
+    public function add(Node $node): GenericLinkedList
     {
         if ($this->head === null) {
             $this->head = $node;

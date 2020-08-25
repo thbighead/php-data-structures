@@ -42,11 +42,11 @@ trait WithTail
     }
 
     /**
-     * @param Node $tail
+     * @param Node|null $tail
      *
      * @return GenericLinkedList|WithTail
      */
-    public function setTail(Node $tail): GenericLinkedList
+    public function setTail($tail): GenericLinkedList
     {
         $this->tail = $tail;
 
