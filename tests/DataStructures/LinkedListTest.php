@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
+use TNCPHP\DataStructures\LinkedLists\Exceptions\SearchValueNotFoundException;
 use TNCPHP\DataStructures\LinkedLists\SinglyLinkedList;
 use TNCPHP\DataStructures\LinkedLists\SinglyLinkedListWithTail;
 use TNCPHP\MinorComponents\Node;
@@ -75,8 +76,19 @@ final class LinkedListTest extends TestCase
             ->add(new Node('else'))
             ->add(new Node('matters'));
 
-        $this->assertTrue($singlyLinkedList->search('never') === null);
-        $this->assertTrue($singlyLinkedList->search('matters')->getData() === 'matters');
+        try {
+            $singlyLinkedList->search('never');
+            $this->fail('Found a node with value "never" inside list without adding it!');
+        } catch (SearchValueNotFoundException $exception) {
+            $this->assertTrue(true);
+        }
+
+        try {
+            $foundNode = $singlyLinkedList->search('matters');
+            $this->assertTrue($foundNode->getData() === 'matters');
+        } catch (SearchValueNotFoundException $exception) {
+            $this->fail($exception->getMessage());
+        }
     }
 
     public function testSearchNodeWithPositionIntoSinglyLinkedList(): void
@@ -87,11 +99,20 @@ final class LinkedListTest extends TestCase
             ->add(new NodeWithPosition('else'))
             ->add(new NodeWithPosition('matters'));
 
-        $this->assertTrue($singlyLinkedList->search('never') === null);
-        /** @var NodeWithPosition $foundNode */
-        $this->assertTrue(
-            ($foundNode = $singlyLinkedList->search('matters'))->getData() === 'matters'
-        );
-        $this->assertTrue($foundNode->getPosition() === 2);
+        try {
+            $singlyLinkedList->search('never');
+            $this->fail('Found a node with value "never" inside list without adding it!');
+        } catch (SearchValueNotFoundException $exception) {
+            $this->assertTrue(true);
+        }
+
+        try {
+            /** @var NodeWithPosition $foundNode */
+            $foundNode = $singlyLinkedList->search('matters');
+            $this->assertTrue($foundNode->getData() === 'matters');
+            $this->assertTrue($foundNode->getPosition() === 2);
+        } catch (SearchValueNotFoundException $exception) {
+            $this->fail($exception->getMessage());
+        }
     }
 }

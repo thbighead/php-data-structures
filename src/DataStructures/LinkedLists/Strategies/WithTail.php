@@ -2,6 +2,7 @@
 
 namespace TNCPHP\DataStructures\LinkedLists\Strategies;
 
+use TNCPHP\DataStructures\LinkedLists\Exceptions\SearchValueNotFoundException;
 use TNCPHP\DataStructures\LinkedLists\GenericLinkedList;
 use TNCPHP\MinorComponents\Node;
 
@@ -31,6 +32,43 @@ trait WithTail
         $this->tail = $this->tail->setNext($node)->getNext();
 
         return $this;
+    }
+
+    /**
+     * @param mixed $dataSearch
+     *
+     * @return $this
+     * @throws SearchValueNotFoundException
+     */
+    public function remove($dataSearch)
+    {
+        /** @var Node $currentNode */
+        $currentNode = $this->head;
+
+        while ($currentNode) {
+            $currentData = $currentNode->getData();
+
+            if ($this->compareData($currentData, $dataSearch)) { // Enter here if we found the node to remove
+                if (isset($parentNode)) { // So the node isn't the head
+                    $parentNode->setNext($currentNode->getNext());
+
+                    if ($currentNode->getNext() === null) { // Actually the node is the tail
+                        $this->tail = $parentNode;
+                    }
+                } else {
+                    $this->head = $this->head->getNext();
+                }
+
+                unset($currentNode);
+
+                return $this;
+            }
+
+            $parentNode = $currentNode;
+            $currentNode = $currentNode->getNext();
+        }
+
+        throw new SearchValueNotFoundException($dataSearch);
     }
 
     /**

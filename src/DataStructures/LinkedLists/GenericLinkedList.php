@@ -22,4 +22,13 @@ abstract class GenericLinkedList extends DataStructure
             $this->setTail(null);
         }
     }
+
+    protected function compareData($actualData, $comparingData)
+    {
+        if (($search_is_callable = is_callable($comparingData))) {
+            return $comparingData($actualData) === true;
+        }
+
+        return $actualData === $comparingData;
+    }
 }

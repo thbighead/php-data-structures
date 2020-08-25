@@ -2,6 +2,7 @@
 
 namespace TNCPHP\DataStructures\LinkedLists;
 
+use TNCPHP\DataStructures\LinkedLists\Exceptions\SearchValueNotFoundException;
 use TNCPHP\MinorComponents\Node;
 
 /**
@@ -30,6 +31,7 @@ class SinglyLinkedList extends GenericLinkedList
      * @param mixed $dataSearch
      *
      * @return Node|null
+     * @throws SearchValueNotFoundException
      */
     public function search($dataSearch)
     {
@@ -38,17 +40,42 @@ class SinglyLinkedList extends GenericLinkedList
         while ($currentNode) {
             $currentData = $currentNode->getData();
 
-            if (($search_is_callable = is_callable($dataSearch)) && $dataSearch($currentData) === true) {
-                return $currentNode;
-            }
-
-            if (!$search_is_callable && $currentData === $dataSearch) {
+            if ($this->compareData($currentData, $dataSearch)) {
                 return $currentNode;
             }
 
             $currentNode = $currentNode->getNext();
         }
 
-        return null;
+        throw new SearchValueNotFoundException($dataSearch);
+    }
+
+    /**
+     * @param mixed $dataSearch
+     *
+     * @return $this
+     * @throws SearchValueNotFoundException
+     */
+    public function remove($dataSearch)
+    {
+        $currentNode = $this->head;
+
+        while ($currentNode) {
+            $currentData = $currentNode->getData();
+
+            if ($this->compareData($currentData, $dataSearch)) {
+                isset($parentNode) ?
+                    $parentNode->setNext($currentNode->getNext()) :
+                    ($this->head = $this->head->getNext());
+                unset($currentNode);
+
+                return $this;
+            }
+
+            $parentNode = $currentNode;
+            $currentNode = $currentNode->getNext();
+        }
+
+        throw new SearchValueNotFoundException($dataSearch);
     }
 }
