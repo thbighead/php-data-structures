@@ -5,7 +5,7 @@ namespace TNCPHP\MinorComponents\Strategies\Node;
 /**
  * Adds position to Nodes
  */
-trait withPosition
+trait WithPosition
 {
     /** @var int $position */
     protected $position;
