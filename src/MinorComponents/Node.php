@@ -4,14 +4,13 @@ namespace TNCPHP\MinorComponents;
 
 /**
  * A classic node of data structure
- *
- * @property mixed $data
- * @property Node $next
  */
 class Node
 {
-    private $data;
+    /** @var Node|null $next */
     private $next;
+    /** @var mixed $data */
+    private $data;
 
     public function __construct($data = null)
     {
@@ -28,7 +27,7 @@ class Node
     }
 
     /**
-     * @return Node
+     * @return Node|null
      */
     public function getNext(): Node
     {
@@ -47,7 +46,7 @@ class Node
     }
 
     /**
-     * @param Node $next
+     * @param Node|null $next
      * @return Node
      */
     public function setNext(Node $next): Node
