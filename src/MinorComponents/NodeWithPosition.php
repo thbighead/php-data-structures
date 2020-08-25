@@ -1,8 +1,7 @@
 <?php
 
-namespace TNCPHP\DataStructures\LinkedLists\MinorComponents;
+namespace TNCPHP\MinorComponents;
 
-use TNCPHP\MinorComponents\Node;
 use TNCPHP\MinorComponents\Strategies\Node\WithPosition;
 
 class NodeWithPosition extends Node

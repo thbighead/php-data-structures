@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use TNCPHP\DataStructures\LinkedLists\MinorComponents\NodeWithPosition;
 use TNCPHP\DataStructures\LinkedLists\SinglyLinkedList;
 use TNCPHP\DataStructures\LinkedLists\SinglyLinkedListWithTail;
 use TNCPHP\MinorComponents\Node;
+use TNCPHP\MinorComponents\NodeWithPosition;
 
 final class LinkedListTest extends TestCase
 {
