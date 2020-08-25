@@ -8,9 +8,9 @@ namespace TNCPHP\MinorComponents;
 class Node
 {
     /** @var Node|null $next */
-    private $next;
+    protected $next;
     /** @var mixed $data */
-    private $data;
+    protected $data;
 
     public function __construct($data = null)
     {
@@ -29,13 +29,14 @@ class Node
     /**
      * @return Node|null
      */
-    public function getNext(): Node
+    public function getNext()
     {
         return $this->next;
     }
 
     /**
      * @param mixed $data
+     *
      * @return Node
      */
     public function setData($data): Node
@@ -47,9 +48,10 @@ class Node
 
     /**
      * @param Node|null $next
+     *
      * @return Node
      */
-    public function setNext(Node $next): Node
+    public function setNext(Node $next)
     {
         $this->next = $next;
 

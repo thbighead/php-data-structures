@@ -25,4 +25,30 @@ class SinglyLinkedList extends GenericLinkedList
 
         return $this;
     }
+
+    /**
+     * @param mixed $dataSearch
+     *
+     * @return Node|null
+     */
+    public function search($dataSearch)
+    {
+        $currentNode = $this->head;
+
+        while ($currentNode) {
+            $currentData = $currentNode->getData();
+
+            if (($search_is_callable = is_callable($dataSearch)) && $dataSearch($currentData) === true) {
+                return $currentNode;
+            }
+
+            if (!$search_is_callable && $currentData === $dataSearch) {
+                return $currentNode;
+            }
+
+            $currentNode = $currentNode->getNext();
+        }
+
+        return null;
+    }
 }
