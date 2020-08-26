@@ -80,4 +80,19 @@ class SinglyLinkedList extends GenericLinkedList
 
         throw new SearchValueNotFoundException($dataSearch);
     }
+
+    /**
+     * @param mixed $dataSearch
+     *
+     * Just an alias to remove($dataSearch) function. Removes a node found by data value test. $dataSearch may be a
+     * function which gets only one parameter that should be the actual node data, and should return true (if is the
+     * data to remove) or false (if it shouldn't).
+     *
+     * @return $this
+     * @throws SearchValueNotFoundException
+     */
+    public function removeByDataValue($dataSearch)
+    {
+        return $this->remove($dataSearch);
+    }
 }
