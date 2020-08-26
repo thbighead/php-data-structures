@@ -45,8 +45,8 @@ final class SinglyLinkedListWithTailTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-        self::$singlyLinkedListWithTail->print();
-        self::$singlyLinkedListWithTail->print(true);
+//        self::$singlyLinkedListWithTail->print();
+//        self::$singlyLinkedListWithTail->print(true);
     }
 
     public function testAddNodeWithPosition(): void
@@ -63,8 +63,8 @@ final class SinglyLinkedListWithTailTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-        self::$singlyLinkedListWithTailUsingNodeWithPosition->print();
-        self::$singlyLinkedListWithTailUsingNodeWithPosition->print(true);
+//        self::$singlyLinkedListWithTailUsingNodeWithPosition->print();
+//        self::$singlyLinkedListWithTailUsingNodeWithPosition->print(true);
     }
 
     public function testSearchNode(): void
@@ -86,8 +86,8 @@ final class SinglyLinkedListWithTailTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-        self::$singlyLinkedListWithTail->print();
-        self::$singlyLinkedListWithTail->print(true);
+//        self::$singlyLinkedListWithTail->print();
+//        self::$singlyLinkedListWithTail->print(true);
     }
 
     public function testSearchNodeWithPosition(): void
@@ -111,8 +111,8 @@ final class SinglyLinkedListWithTailTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-        self::$singlyLinkedListWithTailUsingNodeWithPosition->print();
-        self::$singlyLinkedListWithTailUsingNodeWithPosition->print(true);
+//        self::$singlyLinkedListWithTailUsingNodeWithPosition->print();
+//        self::$singlyLinkedListWithTailUsingNodeWithPosition->print(true);
     }
 
     public function testRemoveNode(): void
@@ -136,8 +136,8 @@ final class SinglyLinkedListWithTailTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-        self::$singlyLinkedListWithTail->print();
-        self::$singlyLinkedListWithTail->print(true);
+//        self::$singlyLinkedListWithTail->print();
+//        self::$singlyLinkedListWithTail->print(true);
     }
 
     public function testRemoveNodeWithPosition(): void
@@ -165,7 +165,7 @@ final class SinglyLinkedListWithTailTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-        self::$singlyLinkedListWithTailUsingNodeWithPosition->print();
-        self::$singlyLinkedListWithTailUsingNodeWithPosition->print(true);
+//        self::$singlyLinkedListWithTailUsingNodeWithPosition->print();
+//        self::$singlyLinkedListWithTailUsingNodeWithPosition->print(true);
     }
 }

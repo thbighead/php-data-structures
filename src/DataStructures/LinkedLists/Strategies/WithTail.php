@@ -42,28 +42,40 @@ trait WithTail
      */
     public function remove($dataSearch)
     {
-        /** @var Node $currentNode */
-        $currentNode = $this->head;
-        $parentNode = $currentNode;
+        $parentNode = null;
 
-        while ($currentNode) {
-            $currentData = $currentNode->getData();
-            $nextNode = $currentNode->getNext();
+        foreach ($this as $key => $node) {
+            /** @var Node|WithTail $node */
+            $data_comparing_result = $this->compareData($node->getData(), $dataSearch);
+            $is_head = !$parentNode;
+            $is_tail = !$node->getNext();
 
-            if ($this->compareData($currentData, $dataSearch)) { // Enter here if we found the node to remove
-                $parentNode->setNext($nextNode);
-
-                if (!$nextNode) {
-                    $this->tail = $parentNode;
-                }
-
-                unset($currentNode);
-
+            if ($data_comparing_result && $is_head && $is_tail) {
+                $this->head = $this->tail = null;
+                unset($node);
                 return $this;
             }
 
-            $parentNode = $currentNode;
-            $currentNode = $nextNode;
+            if ($data_comparing_result && $is_head) {
+                $this->head = $this->head->getNext();
+                unset($node);
+                return $this;
+            }
+
+            if ($data_comparing_result && $is_tail) {
+                $parentNode->setNext($node->getNext());
+                $this->tail = $parentNode;
+                unset($node);
+                return $this;
+            }
+
+            if ($data_comparing_result) {
+                $parentNode->setNext($node->getNext());
+                unset($node);
+                return $this;
+            }
+
+            $parentNode = $node;
         }
 
         throw new SearchValueNotFoundException($dataSearch);

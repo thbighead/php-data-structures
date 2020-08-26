@@ -43,8 +43,8 @@ final class SinglyLinkedListTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-        self::$singlyLinkedList->print();
-        self::$singlyLinkedList->print(true);
+//        self::$singlyLinkedList->print();
+//        self::$singlyLinkedList->print(true);
     }
 
     public function testAddNodeWithPosition(): void
@@ -60,8 +60,8 @@ final class SinglyLinkedListTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-        self::$singlyLinkedListUsingNodeWithPosition->print();
-        self::$singlyLinkedListUsingNodeWithPosition->print(true);
+//        self::$singlyLinkedListUsingNodeWithPosition->print();
+//        self::$singlyLinkedListUsingNodeWithPosition->print(true);
     }
 
     public function testSearchNode(): void
@@ -83,8 +83,8 @@ final class SinglyLinkedListTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-        self::$singlyLinkedList->print();
-        self::$singlyLinkedList->print(true);
+//        self::$singlyLinkedList->print();
+//        self::$singlyLinkedList->print(true);
     }
 
     public function testSearchNodeWithPosition(): void
@@ -108,8 +108,8 @@ final class SinglyLinkedListTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-        self::$singlyLinkedListUsingNodeWithPosition->print();
-        self::$singlyLinkedListUsingNodeWithPosition->print(true);
+//        self::$singlyLinkedListUsingNodeWithPosition->print();
+//        self::$singlyLinkedListUsingNodeWithPosition->print(true);
     }
 
     public function testRemoveNode(): void
@@ -133,8 +133,8 @@ final class SinglyLinkedListTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-        self::$singlyLinkedList->print();
-        self::$singlyLinkedList->print(true);
+//        self::$singlyLinkedList->print();
+//        self::$singlyLinkedList->print(true);
     }
 
     public function testRemoveNodeWithPosition(): void
@@ -162,7 +162,7 @@ final class SinglyLinkedListTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-        self::$singlyLinkedListUsingNodeWithPosition->print();
-        self::$singlyLinkedListUsingNodeWithPosition->print(true);
+//        self::$singlyLinkedListUsingNodeWithPosition->print();
+//        self::$singlyLinkedListUsingNodeWithPosition->print(true);
     }
 }

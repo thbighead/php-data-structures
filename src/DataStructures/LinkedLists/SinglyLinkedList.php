@@ -22,11 +22,12 @@ class SinglyLinkedList extends GenericLinkedList
             return $this;
         }
 
-        $currentNode = $this->head;
-        while ($nextNode = $currentNode->getNext()) {
-            $currentNode = $nextNode;
+        foreach ($this as $currentNode) {
+            if (!$currentNode->getNext()) {
+                $currentNode->setNext($node);
+                break;
+            }
         }
-        $currentNode->setNext($node);
 
         return $this;
     }
@@ -64,14 +65,12 @@ class SinglyLinkedList extends GenericLinkedList
             if ($data_comparing_result && !$parentNode) {
                 $this->head = $this->head->getNext();
                 unset($node);
-
                 return $this;
             }
 
             if ($data_comparing_result) {
                 $parentNode->setNext($node->getNext());
                 unset($node);
-
                 return $this;
             }
 
@@ -95,6 +94,10 @@ class SinglyLinkedList extends GenericLinkedList
     {
         return $this->remove($dataSearch);
     }
+
+    /*
+     * Implementations
+     */
 
     public function current()
     {
@@ -128,11 +131,9 @@ class SinglyLinkedList extends GenericLinkedList
     public function count()
     {
         $counter = 0;
-        $currentNode = $this->head;
 
-        while ($currentNode) {
+        foreach ($this as $node) {
             $counter++;
-            $currentNode = $currentNode->getNext();
         }
 
         return $counter;
