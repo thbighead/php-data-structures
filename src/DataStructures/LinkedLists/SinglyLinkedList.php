@@ -4,12 +4,16 @@ namespace TNCPHP\DataStructures\LinkedLists;
 
 use TNCPHP\DataStructures\LinkedLists\Exceptions\SearchValueNotFoundException;
 use TNCPHP\MinorComponents\Node;
+use TNCPHP\MinorComponents\NodeWithPosition;
 
 /**
  * Class SinglyLinkedList
  */
 class SinglyLinkedList extends GenericLinkedList
 {
+    /** @var Node $currentNode */
+    private $currentNode;
+
     public function add(Node $node): GenericLinkedList
     {
         if ($this->head === null) {
@@ -35,16 +39,10 @@ class SinglyLinkedList extends GenericLinkedList
      */
     public function search($dataSearch)
     {
-        $currentNode = $this->head;
-
-        while ($currentNode) {
-            $currentData = $currentNode->getData();
-
-            if ($this->compareData($currentData, $dataSearch)) {
-                return $currentNode;
+        foreach ($this as $key => $node) {
+            if ($this->compareData($node->getData(), $dataSearch)) {
+                return $node;
             }
-
-            $currentNode = $currentNode->getNext();
         }
 
         throw new SearchValueNotFoundException($dataSearch);
@@ -58,24 +56,26 @@ class SinglyLinkedList extends GenericLinkedList
      */
     public function remove($dataSearch)
     {
-        /** @var Node $currentNode */
-        $currentNode = $this->head;
-        $parentNode = $currentNode;
+        $parentNode = null;
 
-        while ($currentNode) {
-            $currentData = $currentNode->getData();
-            $nextNode = $currentNode->getNext();
+        foreach ($this as $key => $node) {
+            $data_comparing_result = $this->compareData($node->getData(), $dataSearch);
 
-            if ($this->compareData($currentData, $dataSearch)) { // Enter here if we found the node to remove
-                $parentNode->setNext($nextNode);
-
-                unset($currentNode);
+            if ($data_comparing_result && !$parentNode) {
+                $this->head = $this->head->getNext();
+                unset($node);
 
                 return $this;
             }
 
-            $parentNode = $currentNode;
-            $currentNode = $nextNode;
+            if ($data_comparing_result) {
+                $parentNode->setNext($node->getNext());
+                unset($node);
+
+                return $this;
+            }
+
+            $parentNode = $node;
         }
 
         throw new SearchValueNotFoundException($dataSearch);
@@ -94,5 +94,70 @@ class SinglyLinkedList extends GenericLinkedList
     public function removeByDataValue($dataSearch)
     {
         return $this->remove($dataSearch);
+    }
+
+    public function current()
+    {
+        return $this->currentNode;
+    }
+
+    public function next()
+    {
+        $this->currentNode = $this->current()->getNext();
+    }
+
+    public function key()
+    {
+        if ($this->current() instanceof NodeWithPosition) {
+            return $this->current()->getPosition();
+        }
+
+        return $this->current()->getData();
+    }
+
+    public function valid()
+    {
+        return !!$this->current();
+    }
+
+    public function rewind()
+    {
+        $this->currentNode = $this->head;
+    }
+
+    public function count()
+    {
+        $counter = 0;
+        $currentNode = $this->head;
+
+        while ($currentNode) {
+            $counter++;
+            $currentNode = $currentNode->getNext();
+        }
+
+        return $counter;
+    }
+
+    /**
+     * Turns the list into a PHP array. Be careful when using $keyed == true, because there may be duplicated keys into
+     * your linked list structure leading to data "disappearing".
+     *
+     * @param bool $keyed
+     * @return array
+     */
+    public function toArray($keyed = false)
+    {
+        $array = [];
+
+        foreach ($this as $key => $node) {
+            if ($keyed) {
+                $array[$key] = $node;
+                continue;
+            }
+
+            $array[] = $node;
+        }
+
+        return $array;
     }
 }

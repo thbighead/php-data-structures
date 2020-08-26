@@ -8,7 +8,6 @@ use TNCPHP\MinorComponents\NodeWithPosition;
 
 final class SinglyLinkedListWithTailTest extends TestCase
 {
-
     private const FACE = 'face';
     private const THE = 'the';
     private const STORM = 'storm';
@@ -45,13 +44,16 @@ final class SinglyLinkedListWithTailTest extends TestCase
         } catch (Exception $exception) {
             $this->fail($exception->getMessage());
         }
+
+        self::$singlyLinkedListWithTail->print();
+        self::$singlyLinkedListWithTail->print(true);
     }
 
     public function testAddNodeWithPosition(): void
     {
         $node = new NodeWithPosition(self::FACE);
 
-        $this->assertTrue(property_exists(self::$singlyLinkedListWithTail, self::TAIL));
+        $this->assertTrue(property_exists(self::$singlyLinkedListWithTailUsingNodeWithPosition, self::TAIL));
         $this->assertTrue(property_exists($node, self::POSITION));
 
         try {
@@ -60,6 +62,9 @@ final class SinglyLinkedListWithTailTest extends TestCase
         } catch (Exception $exception) {
             $this->fail($exception->getMessage());
         }
+
+        self::$singlyLinkedListWithTailUsingNodeWithPosition->print();
+        self::$singlyLinkedListWithTailUsingNodeWithPosition->print(true);
     }
 
     public function testSearchNode(): void
@@ -80,6 +85,9 @@ final class SinglyLinkedListWithTailTest extends TestCase
         } catch (SearchValueNotFoundException $exception) {
             $this->fail($exception->getMessage());
         }
+
+        self::$singlyLinkedListWithTail->print();
+        self::$singlyLinkedListWithTail->print(true);
     }
 
     public function testSearchNodeWithPosition(): void
@@ -102,6 +110,9 @@ final class SinglyLinkedListWithTailTest extends TestCase
         } catch (SearchValueNotFoundException $exception) {
             $this->fail($exception->getMessage());
         }
+
+        self::$singlyLinkedListWithTailUsingNodeWithPosition->print();
+        self::$singlyLinkedListWithTailUsingNodeWithPosition->print(true);
     }
 
     public function testRemoveNode(): void
@@ -124,6 +135,9 @@ final class SinglyLinkedListWithTailTest extends TestCase
         } catch (SearchValueNotFoundException $exception) {
             $this->fail($exception->getMessage());
         }
+
+        self::$singlyLinkedListWithTail->print();
+        self::$singlyLinkedListWithTail->print(true);
     }
 
     public function testRemoveNodeWithPosition(): void
@@ -150,5 +164,8 @@ final class SinglyLinkedListWithTailTest extends TestCase
         } catch (SearchValueNotFoundException $exception) {
             $this->fail($exception->getMessage());
         }
+
+        self::$singlyLinkedListWithTailUsingNodeWithPosition->print();
+        self::$singlyLinkedListWithTailUsingNodeWithPosition->print(true);
     }
 }

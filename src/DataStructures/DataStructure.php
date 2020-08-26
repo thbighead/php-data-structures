@@ -2,13 +2,21 @@
 
 namespace TNCPHP\DataStructures;
 
-abstract class DataStructure
+use Countable;
+use Iterator;
+
+abstract class DataStructure implements Arrayable, Countable, Iterator
 {
     private $strategies;
 
     public function __construct()
     {
         $this->strategies = class_uses($this);
+    }
+
+    public function print($keyed = false)
+    {
+        print_r($this->toArray($keyed));
     }
 
     /**
