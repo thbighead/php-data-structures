@@ -46,7 +46,7 @@ trait WithTail
 
         foreach ($this as $key => $node) {
             /** @var Node|WithTail $node */
-            $data_comparing_result = $this->compareData($node->getData(), $dataSearch);
+            $data_comparing_result = $this->compareNodeData($node->getData(), $dataSearch);
             $is_head = !$parentNode;
             $is_tail = !$node->getNext();
 

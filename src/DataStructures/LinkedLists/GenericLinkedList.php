@@ -23,12 +23,12 @@ abstract class GenericLinkedList extends DataStructure
         }
     }
 
-    protected function compareData($actualData, $comparingData)
+    protected function compareNodeData($actualNodeData, $comparingNodeData)
     {
-        if (($search_is_callable = is_callable($comparingData))) {
-            return $comparingData($actualData) === true;
+        if (($search_is_callable = is_callable($comparingNodeData))) {
+            return $comparingNodeData($actualNodeData) === true;
         }
 
-        return $actualData === $comparingData;
+        return $actualNodeData === $comparingNodeData;
     }
 }

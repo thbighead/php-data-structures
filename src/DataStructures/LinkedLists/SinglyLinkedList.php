@@ -41,7 +41,7 @@ class SinglyLinkedList extends GenericLinkedList
     public function search($dataSearch)
     {
         foreach ($this as $key => $node) {
-            if ($this->compareData($node->getData(), $dataSearch)) {
+            if ($this->compareNodeData($node->getData(), $dataSearch)) {
                 return $node;
             }
         }
@@ -60,7 +60,7 @@ class SinglyLinkedList extends GenericLinkedList
         $parentNode = null;
 
         foreach ($this as $key => $node) {
-            $data_comparing_result = $this->compareData($node->getData(), $dataSearch);
+            $data_comparing_result = $this->compareNodeData($node->getData(), $dataSearch);
 
             if ($data_comparing_result && !$parentNode) {
                 $this->head = $this->head->getNext();
@@ -141,7 +141,7 @@ class SinglyLinkedList extends GenericLinkedList
 
     /**
      * Turns the list into a PHP array. Be careful when using $keyed == true, because there may be duplicated keys into
-     * your linked list structure leading to data "disappearing".
+     * your linked list structure leading to data "disappearing" (only the last keyed value shall remain).
      *
      * @param bool $keyed
      * @return array
