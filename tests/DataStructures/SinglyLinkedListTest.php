@@ -43,8 +43,8 @@ final class SinglyLinkedListTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-//        self::$singlyLinkedList->print();
-//        self::$singlyLinkedList->print(true);
+        self::$singlyLinkedList->print();
+        self::$singlyLinkedList->print(true);
     }
 
     public function testAddNodeWithPosition(): void
@@ -60,8 +60,8 @@ final class SinglyLinkedListTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-//        self::$singlyLinkedListUsingNodeWithPosition->print();
-//        self::$singlyLinkedListUsingNodeWithPosition->print(true);
+        self::$singlyLinkedListUsingNodeWithPosition->print();
+        self::$singlyLinkedListUsingNodeWithPosition->print(true);
     }
 
     public function testSearchNode(): void
@@ -70,21 +70,21 @@ final class SinglyLinkedListTest extends TestCase
             ->add(new Node(self::MATTERS));
 
         try {
-            self::$singlyLinkedList->search(self::NEVER);
+            self::$singlyLinkedList->searchByNodeData(self::NEVER);
             $this->fail('Found a node with value "' . self::NEVER . '" inside list without adding it!');
         } catch (SearchValueNotFoundException $exception) {
             $this->assertTrue(true);
         }
 
         try {
-            $foundNode = self::$singlyLinkedList->search(self::MATTERS);
+            $foundNode = self::$singlyLinkedList->searchByNodeData(self::MATTERS);
             $this->assertTrue($foundNode->getData() === self::MATTERS);
         } catch (SearchValueNotFoundException $exception) {
             $this->fail($exception->getMessage());
         }
 
-//        self::$singlyLinkedList->print();
-//        self::$singlyLinkedList->print(true);
+        self::$singlyLinkedList->print();
+        self::$singlyLinkedList->print(true);
     }
 
     public function testSearchNodeWithPosition(): void
@@ -93,7 +93,7 @@ final class SinglyLinkedListTest extends TestCase
             ->add(new NodeWithPosition(self::MATTERS));
 
         try {
-            self::$singlyLinkedListUsingNodeWithPosition->search(self::NEVER);
+            self::$singlyLinkedListUsingNodeWithPosition->searchByNodeData(self::NEVER);
             $this->fail('Found a positioned node with value "' . self::NEVER . '" inside list without adding it!');
         } catch (SearchValueNotFoundException $exception) {
             $this->assertTrue(true);
@@ -101,30 +101,30 @@ final class SinglyLinkedListTest extends TestCase
 
         try {
             /** @var NodeWithPosition $foundNode */
-            $foundNode = self::$singlyLinkedListUsingNodeWithPosition->search(self::MATTERS);
+            $foundNode = self::$singlyLinkedListUsingNodeWithPosition->searchByNodeData(self::MATTERS);
             $this->assertTrue($foundNode->getData() === self::MATTERS);
             $this->assertTrue($foundNode->getPosition() === 2);
         } catch (SearchValueNotFoundException $exception) {
             $this->fail($exception->getMessage());
         }
 
-//        self::$singlyLinkedListUsingNodeWithPosition->print();
-//        self::$singlyLinkedListUsingNodeWithPosition->print(true);
+        self::$singlyLinkedListUsingNodeWithPosition->print();
+        self::$singlyLinkedListUsingNodeWithPosition->print(true);
     }
 
     public function testRemoveNode(): void
     {
         try {
-            self::$singlyLinkedList->remove(self::NEVER);
+            self::$singlyLinkedList->removeByNodeData(self::NEVER);
             $this->fail('Found a node to remove with value "' . self::NEVER . '" inside list without adding it!');
         } catch (SearchValueNotFoundException $exception) {
             $this->assertTrue(true);
         }
 
         try {
-            self::$singlyLinkedList->remove(self::MATTERS);
+            self::$singlyLinkedList->removeByNodeData(self::MATTERS);
             try {
-                self::$singlyLinkedList->search(self::MATTERS);
+                self::$singlyLinkedList->searchByNodeData(self::MATTERS);
                 $this->fail('Found a node with value "' . self::MATTERS . '" inside list after removing it!');
             } catch (SearchValueNotFoundException $exception) {
                 $this->assertTrue(true);
@@ -133,14 +133,14 @@ final class SinglyLinkedListTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-//        self::$singlyLinkedList->print();
-//        self::$singlyLinkedList->print(true);
+        self::$singlyLinkedList->print();
+        self::$singlyLinkedList->print(true);
     }
 
     public function testRemoveNodeWithPosition(): void
     {
         try {
-            self::$singlyLinkedListUsingNodeWithPosition->remove(self::NEVER);
+            self::$singlyLinkedListUsingNodeWithPosition->removeByNodeData(self::NEVER);
             $this->fail('Found a positioned node to remove with value "'
                 . self::NEVER
                 . '" inside list without adding it!');
@@ -149,9 +149,9 @@ final class SinglyLinkedListTest extends TestCase
         }
 
         try {
-            self::$singlyLinkedListUsingNodeWithPosition->remove(self::MATTERS);
+            self::$singlyLinkedListUsingNodeWithPosition->removeByNodeData(self::MATTERS);
             try {
-                self::$singlyLinkedListUsingNodeWithPosition->search(self::MATTERS);
+                self::$singlyLinkedListUsingNodeWithPosition->searchByNodeData(self::MATTERS);
                 $this->fail('Found a positioned node with value "'
                     . self::MATTERS
                     . '" inside list after removing it!');
@@ -162,7 +162,7 @@ final class SinglyLinkedListTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-//        self::$singlyLinkedListUsingNodeWithPosition->print();
-//        self::$singlyLinkedListUsingNodeWithPosition->print(true);
+        self::$singlyLinkedListUsingNodeWithPosition->print();
+        self::$singlyLinkedListUsingNodeWithPosition->print(true);
     }
 }

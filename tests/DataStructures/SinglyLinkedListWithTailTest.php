@@ -45,8 +45,8 @@ final class SinglyLinkedListWithTailTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-//        self::$singlyLinkedListWithTail->print();
-//        self::$singlyLinkedListWithTail->print(true);
+        self::$singlyLinkedListWithTail->print();
+        self::$singlyLinkedListWithTail->print(true);
     }
 
     public function testAddNodeWithPosition(): void
@@ -63,8 +63,8 @@ final class SinglyLinkedListWithTailTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-//        self::$singlyLinkedListWithTailUsingNodeWithPosition->print();
-//        self::$singlyLinkedListWithTailUsingNodeWithPosition->print(true);
+        self::$singlyLinkedListWithTailUsingNodeWithPosition->print();
+        self::$singlyLinkedListWithTailUsingNodeWithPosition->print(true);
     }
 
     public function testSearchNode(): void
@@ -73,21 +73,21 @@ final class SinglyLinkedListWithTailTest extends TestCase
             ->add(new Node(self::STORM));
 
         try {
-            self::$singlyLinkedListWithTail->search(self::STRENGTH);
+            self::$singlyLinkedListWithTail->searchByNodeData(self::STRENGTH);
             $this->fail('Found a node with value "' . self::STRENGTH . '" inside list without adding it!');
         } catch (SearchValueNotFoundException $exception) {
             $this->assertTrue(true);
         }
 
         try {
-            $foundNode = self::$singlyLinkedListWithTail->search(self::STORM);
+            $foundNode = self::$singlyLinkedListWithTail->searchByNodeData(self::STORM);
             $this->assertTrue($foundNode->getData() === self::STORM);
         } catch (SearchValueNotFoundException $exception) {
             $this->fail($exception->getMessage());
         }
 
-//        self::$singlyLinkedListWithTail->print();
-//        self::$singlyLinkedListWithTail->print(true);
+        self::$singlyLinkedListWithTail->print();
+        self::$singlyLinkedListWithTail->print(true);
     }
 
     public function testSearchNodeWithPosition(): void
@@ -96,7 +96,7 @@ final class SinglyLinkedListWithTailTest extends TestCase
             ->add(new NodeWithPosition(self::STORM));
 
         try {
-            self::$singlyLinkedListWithTailUsingNodeWithPosition->search(self::STRENGTH);
+            self::$singlyLinkedListWithTailUsingNodeWithPosition->searchByNodeData(self::STRENGTH);
             $this->fail('Found a positioned node with value "' . self::STRENGTH . '" inside list without adding it!');
         } catch (SearchValueNotFoundException $exception) {
             $this->assertTrue(true);
@@ -104,30 +104,30 @@ final class SinglyLinkedListWithTailTest extends TestCase
 
         try {
             /** @var NodeWithPosition $foundNode */
-            $foundNode = self::$singlyLinkedListWithTailUsingNodeWithPosition->search(self::STORM);
+            $foundNode = self::$singlyLinkedListWithTailUsingNodeWithPosition->searchByNodeData(self::STORM);
             $this->assertTrue($foundNode->getData() === self::STORM);
             $this->assertTrue($foundNode->getPosition() === 2);
         } catch (SearchValueNotFoundException $exception) {
             $this->fail($exception->getMessage());
         }
 
-//        self::$singlyLinkedListWithTailUsingNodeWithPosition->print();
-//        self::$singlyLinkedListWithTailUsingNodeWithPosition->print(true);
+        self::$singlyLinkedListWithTailUsingNodeWithPosition->print();
+        self::$singlyLinkedListWithTailUsingNodeWithPosition->print(true);
     }
 
     public function testRemoveNode(): void
     {
         try {
-            self::$singlyLinkedListWithTail->remove(self::STRENGTH);
+            self::$singlyLinkedListWithTail->removeByNodeData(self::STRENGTH);
             $this->fail('Found a node to remove with value "' . self::STRENGTH . '" inside list without adding it!');
         } catch (SearchValueNotFoundException $exception) {
             $this->assertTrue(true);
         }
 
         try {
-            self::$singlyLinkedListWithTail->remove(self::STORM);
+            self::$singlyLinkedListWithTail->removeByNodeData(self::STORM);
             try {
-                self::$singlyLinkedListWithTail->search(self::STORM);
+                self::$singlyLinkedListWithTail->searchByNodeData(self::STORM);
                 $this->fail('Found a node with value "' . self::STORM . '" inside list after removing it!');
             } catch (SearchValueNotFoundException $exception) {
                 $this->assertTrue(true);
@@ -136,14 +136,14 @@ final class SinglyLinkedListWithTailTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-//        self::$singlyLinkedListWithTail->print();
-//        self::$singlyLinkedListWithTail->print(true);
+        self::$singlyLinkedListWithTail->print();
+        self::$singlyLinkedListWithTail->print(true);
     }
 
     public function testRemoveNodeWithPosition(): void
     {
         try {
-            self::$singlyLinkedListWithTailUsingNodeWithPosition->remove(self::STRENGTH);
+            self::$singlyLinkedListWithTailUsingNodeWithPosition->removeByNodeData(self::STRENGTH);
             $this->fail('Found a positioned node to remove with value "'
                 . self::STRENGTH
                 . '" inside list without adding it!');
@@ -152,9 +152,9 @@ final class SinglyLinkedListWithTailTest extends TestCase
         }
 
         try {
-            self::$singlyLinkedListWithTailUsingNodeWithPosition->remove(self::STORM);
+            self::$singlyLinkedListWithTailUsingNodeWithPosition->removeByNodeData(self::STORM);
             try {
-                self::$singlyLinkedListWithTailUsingNodeWithPosition->search(self::STORM);
+                self::$singlyLinkedListWithTailUsingNodeWithPosition->searchByNodeData(self::STORM);
                 $this->fail('Found a positioned node with value "'
                     . self::STORM
                     . '" inside list after removing it!');
@@ -165,7 +165,7 @@ final class SinglyLinkedListWithTailTest extends TestCase
             $this->fail($exception->getMessage());
         }
 
-//        self::$singlyLinkedListWithTailUsingNodeWithPosition->print();
-//        self::$singlyLinkedListWithTailUsingNodeWithPosition->print(true);
+        self::$singlyLinkedListWithTailUsingNodeWithPosition->print();
+        self::$singlyLinkedListWithTailUsingNodeWithPosition->print(true);
     }
 }

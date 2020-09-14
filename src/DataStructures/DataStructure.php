@@ -23,7 +23,7 @@ abstract class DataStructure implements Arrayable, Countable, Iterator
      * @param string $strategyClass
      * @return bool
      */
-    protected function isUsingStrategy($strategyClass)
+    protected function isUsingStrategy(string $strategyClass)
     {
         $testResult = $this->strategies[$strategyClass] ?? false;
 
