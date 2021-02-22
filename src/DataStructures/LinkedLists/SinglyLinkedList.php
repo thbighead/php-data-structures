@@ -2,75 +2,153 @@
 
 namespace TNCPHP\DataStructures\LinkedLists;
 
-use TNCPHP\DataStructures\LinkedLists\Exceptions\SearchValueNotFoundException;
-use TNCPHP\MinorComponents\Node;
+use TNCPHP\Exceptions\EmptyLinkedList;
+use TNCPHP\Exceptions\NodeNotFoundInLinkedList;
+use TNCPHP\MinorComponents\Nodes\BaseNode;
+use TNCPHP\MinorComponents\Nodes\Node;
 
-/**
- * Class SinglyLinkedList
- */
-class SinglyLinkedList extends GenericLinkedList
+class SinglyLinkedList extends BaseLinkedList
 {
+    public static function createNode($data): BaseNode
+    {
+        return new Node($data);
+    }
+
     /**
-     * @param mixed $dataSearch
-     *
+     * @param mixed $value
+     * @throws EmptyLinkedList
+     * @throws NodeNotFoundInLinkedList
+     */
+    public function removeAfter($value)
+    {
+        /** @var Node $found */
+        $found = $this->search($value);
+
+        $obsoleteNode = $found->getNext();
+        $found->setNext($obsoleteNode->getNext());
+        unset($obsoleteNode);
+    }
+
+    /**
+     * @throws EmptyLinkedList
+     */
+    public function removeFromBeginning()
+    {
+        $obsoleteNode = $this->head;
+
+        if ($obsoleteNode === null) {
+            throw new EmptyLinkedList();
+        }
+
+        $this->head = $this->head->getNext();
+        unset($obsoleteNode);
+    }
+
+    /**
+     * @throws EmptyLinkedList
+     */
+    public function removeFromEnd()
+    {
+        $parentNode = $obsoleteNode = $this->head;
+
+        if ($obsoleteNode === null) {
+            throw new EmptyLinkedList();
+        }
+
+        while ($obsoleteNode->getNext() !== null) {
+            $parentNode = $obsoleteNode;
+            $obsoleteNode = $obsoleteNode->getNext();
+        }
+
+        if ($parentNode === $obsoleteNode) {
+            unset($this->head);
+            return;
+        }
+
+        $parentNode->setNext($obsoleteNode->getNext());
+        unset($obsoleteNode);
+    }
+
+    /**
+     * @param mixed $value
+     * @param Node $node
+     * @throws EmptyLinkedList
+     * @throws NodeNotFoundInLinkedList
+     */
+    public function insertAfter($value, Node $node)
+    {
+        /** @var Node $found */
+        $found = $this->search($value);
+
+        $node->setNext($found->getNext());
+        $found->setNext($node);
+    }
+
+    public function insertAtBeginning(Node $node)
+    {
+        $node->setNext($this->head);
+        $this->head = $node;
+    }
+
+    public function insertAtEnd(Node $node)
+    {
+        $lastNode = $this->head;
+
+        if ($lastNode === null) {
+            $this->head = $node;
+        }
+
+        while ($lastNode->getNext() !== null) {
+            $lastNode = $lastNode->getNext();
+        }
+
+        $lastNode->setNext($node);
+    }
+
+    /**
+     * @param mixed $value
      * @return Node|null
-     * @throws SearchValueNotFoundException
+     * @throws EmptyLinkedList
+     * @throws NodeNotFoundInLinkedList
      */
-    public function searchByNodeData($dataSearch)
+    public function search($value): ?Node
     {
-        foreach ($this as $key => $node) {
-            if ($this->compareCurrentNodeData($dataSearch)) {
-                return $node;
-            }
+        $currentNode = $this->head;
+
+        if ($currentNode === null) {
+            throw new EmptyLinkedList();
         }
 
-        throw new SearchValueNotFoundException($dataSearch);
+        while ($currentNode !== null) {
+            if (is_callable($value)) {
+                if ($value($currentNode->getData())) {
+                    return $currentNode;
+                }
+            } elseif ($currentNode->getData() === $value) {
+                return $currentNode;
+            }
+
+            $currentNode = $currentNode->getNext();
+        }
+
+        throw new NodeNotFoundInLinkedList();
     }
 
     /**
-     * @param mixed $dataSearch
-     *
-     * @return Node[]|null
-     * @throws SearchValueNotFoundException
+     * @param callable $doSomethingWithNode
+     * @throws EmptyLinkedList
      */
-    public function searchByNodeDataWithParent($dataSearch)
+    public function traverse(callable $doSomethingWithNode)
     {
-        $parentNode = null;
+        $currentNode = $this->head;
 
-        foreach ($this as $key => $node) {
-            if ($this->compareCurrentNodeData($dataSearch)) {
-                return [$parentNode, $node];
-            }
-
-            $parentNode = $node;
+        if ($currentNode === null) {
+            throw new EmptyLinkedList();
         }
 
-        throw new SearchValueNotFoundException($dataSearch);
-    }
-
-    /**
-     * @param mixed $dataSearch
-     *
-     * @return $this
-     * @throws SearchValueNotFoundException
-     */
-    public function removeByNodeData($dataSearch)
-    {
-        list($parentNode, $foundNode) = $this->searchByNodeDataWithParent($dataSearch);
-        $data_comparing_result = $this->compareCurrentNodeData($dataSearch);
-
-        if ($data_comparing_result && !$parentNode) {
-            $this->head = $this->head->getNext();
-            unset($foundNode);
-            return $this;
+        while ($currentNode !== null) {
+            $doSomethingWithNode($currentNode);
+            $currentNode = $currentNode->getNext();
         }
-
-        if ($data_comparing_result) {
-            $parentNode->setNext($foundNode->getNext());
-            unset($foundNode);
-            return $this;
-        }
-
-        throw new SearchValueNotFoundException($dataSearch);
     }
 }
