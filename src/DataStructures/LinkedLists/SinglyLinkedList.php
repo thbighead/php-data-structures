@@ -9,6 +9,10 @@ use TNCPHP\MinorComponents\Nodes\Node;
 
 class SinglyLinkedList extends BaseLinkedList
 {
+    /**
+     * @param $data
+     * @return Node
+     */
     public static function createNode($data): BaseNode
     {
         return new Node($data);
@@ -36,7 +40,7 @@ class SinglyLinkedList extends BaseLinkedList
     {
         $obsoleteNode = $this->head;
 
-        if ($obsoleteNode === null) {
+        if ($this->isEmpty()) {
             throw new EmptyLinkedList();
         }
 
@@ -51,7 +55,7 @@ class SinglyLinkedList extends BaseLinkedList
     {
         $parentNode = $obsoleteNode = $this->head;
 
-        if ($obsoleteNode === null) {
+        if ($this->isEmpty()) {
             throw new EmptyLinkedList();
         }
 
@@ -115,7 +119,7 @@ class SinglyLinkedList extends BaseLinkedList
     {
         $currentNode = $this->head;
 
-        if ($currentNode === null) {
+        if ($this->isEmpty()) {
             throw new EmptyLinkedList();
         }
 
@@ -132,23 +136,5 @@ class SinglyLinkedList extends BaseLinkedList
         }
 
         throw new NodeNotFoundInLinkedList();
-    }
-
-    /**
-     * @param callable $doSomethingWithNode
-     * @throws EmptyLinkedList
-     */
-    public function traverse(callable $doSomethingWithNode)
-    {
-        $currentNode = $this->head;
-
-        if ($currentNode === null) {
-            throw new EmptyLinkedList();
-        }
-
-        while ($currentNode !== null) {
-            $doSomethingWithNode($currentNode);
-            $currentNode = $currentNode->getNext();
-        }
     }
 }
