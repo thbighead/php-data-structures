@@ -29,8 +29,10 @@ class SinglyLinkedList extends BaseLinkedList
         $found = $this->search($value);
 
         $obsoleteNode = $found->getNext();
-        $found->setNext($obsoleteNode->getNext());
-        unset($obsoleteNode);
+        if ($obsoleteNode) {
+            $found->setNext($obsoleteNode->getNext());
+            unset($obsoleteNode);
+        }
     }
 
     /**
@@ -65,7 +67,8 @@ class SinglyLinkedList extends BaseLinkedList
         }
 
         if ($parentNode === $obsoleteNode) {
-            unset($this->head);
+            $this->head = null;
+            unset($obsoleteNode);
             return;
         }
 
@@ -100,6 +103,7 @@ class SinglyLinkedList extends BaseLinkedList
 
         if ($lastNode === null) {
             $this->head = $node;
+            return;
         }
 
         while ($lastNode->getNext() !== null) {

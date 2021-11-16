@@ -18,28 +18,42 @@ abstract class BaseLinkedList extends BaseDataStructure
         $this->head = $node;
     }
 
+    public function getHead(): ?BaseNode
+    {
+        return $this->head;
+    }
+
     public function isEmpty(): bool
     {
         return $this->head === null;
     }
 
     /**
+     * @param bool $output_to_string
+     * @return string|null
      * @throws EmptyLinkedList
      */
-    public function print(): void
+    public function print(bool $output_to_string = false): ?string
     {
         $index = 0;
-        $this->traverse(function (Node $currentNode) use (&$index) {
+        $print_data = '';
+        $this->traverse(function (BaseNode $currentNode) use (&$index, &$print_data) {
             if ($index === 0) {
-                echo "{$currentNode->getData()}";
+                $print_data .= "{$currentNode->getData()}";
                 $index++;
                 return;
             }
 
-            echo "->{$currentNode->getData()}";
+            $print_data .= "->{$currentNode->getData()}";
         });
 
-        echo "\n";
+        if ($output_to_string) {
+            return $print_data;
+        }
+
+        echo "$print_data\n";
+
+        return null;
     }
 
     /**
